@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { questions } from "./questions"
+
+import mobile from "./images/illustration-woman-online-mobile.svg"
+import desktop from "./images/illustration-woman-online-desktop.svg"
+import SingleQuestion from "./SingleQuestion";
 
 function App() {
+
+  const [quests,] = useState(questions);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <article>
+        <picture>
+          <source media="(min-width: 768px" srcSet={desktop} />
+          <img src={mobile} alt="bg-faq"/>
+        </picture>
+      </article>
+      <article>
+        <h1>FAQ</h1>
+        {quests.map((quest, index)=> {
+          return (<SingleQuestion 
+            key={index} 
+            question={quest.question} 
+            answer={quest.answer}
+            // {...quest}  asi tambien funciona(spread operator)
+          />)
+        })}
+      </article>
     </div>
   );
 }
